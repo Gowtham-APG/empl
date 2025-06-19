@@ -1,33 +1,31 @@
-# render.yaml – Render blueprint definition
+# render.yaml – Blueprint for EMS/Empl project
 
-# Enable preview environments (optional)
 previews:
-  generation: automatic
+  generation: automatic  # optional: enable preview environments for PRs
 
-# Define web service for your EMS/Empl project
 services:
   - type: web
     name: empl-web
-    runtime: java   # or docker if using Dockerfile
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    plan: standard
+    region: oregon
     branch: main
-    buildCommand: mvn package  # or your build process
-    startCommand: java -jar target/your-app.jar  # adjust to your JAR
+    buildCommand: mvn package
+    startCommand: java -jar target/your-app.jar
     envVars:
       - key: SPRING_PROFILES_ACTIVE
         value: prod
-      # Example of injecting DB URL from a managed database
-      # - key: DATABASE_URL
-      #   fromDatabase:
-      #     name: empl-db
-      #     property: connectionString
+      - key: DATABASE_URL
+        fromDatabase:
+          name: empl-db
+          property: connectionString
 
-# (Optional) Add a PostgreSQL database
 databases:
   - name: empl-db
-    plan: standard
-    region: oregon  # or your preferred region
+    plan: basic-256mb
+    region: oregon
 
-# Environment Groups (optional, for shared env vars)
 envVarGroups:
   - name: default-env
     envVars:

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Employeee Management System</title>
+    <style>
+        a {
+        text-decoration: none;
+        color: green;
+        }
+        a:hover {
+        color: blue;
+        }
+        table{
+          width:100%;
+        border-collapse:collapse;
+        margin-top:30px;
+       }
+        td{
+          text-align:center
+        }
+        th{
+        background-color: green;
+        color : white
+        }
+    </style>
+</head>
+<body>
+     <center>
+        <h1> Employee List</h1>
+     </center>
+     <a href="/employees/add" > Add New Employee </a>
+<table border="1">
+    <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Salary</th>
+        <th>Actions</th>
+    </tr>
+    <tr th:each="employee : ${employees}">
+        <td th:text="${employee.name}"></td>
+        <td th:text="${employee.mailId}"></td>
+        <td th:text="${employee.salary}"></td>
+        <td>
+            <a th:href="@{/employees/edit/{id}(id=${employee.id})}">Edit</a>
+            <a th:href="@{/employees/delete/{id}(id=${employee.id})}">Delete</a>
+            <a th:href="@{/employees/view/{id}(id=${employee.id})}">View</a>
+        </td>
+    </tr>
+
+
+</table>
+</body>
+</html>

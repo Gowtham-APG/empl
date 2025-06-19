@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Add new Employee</title>
+  <style>
+  form{
+  background-color: lightgrey;
+  padding:30px ;
+  width:40%;
+  }
+  input{
+  width:100%
+
+  }
+  button{
+  background-color: green;
+  color: white;
+  }
+  </style>
+</head>
+<h1>Edit Employee Detials</h1>
+<body>
+<form th:action="@{/employees/edit/{id}(id=${employee.id})}" th:object="${employee}" method="post">
+  Name<input type="text"   th:field="*{name}"/> <br>
+  Email<input type="text"  th:field="*{mailId}" /> <br>
+
+  Salary<input type="number" th:field="*{salary}" /> <br>
+
+  <button type="submit">Update</button>
+</form>
+</body>
+</html>

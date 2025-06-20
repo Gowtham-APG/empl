@@ -1,4 +1,4 @@
-# Stage 1: Build using Maven
+# Stage 1: Build with Maven and JDK 17
 FROM maven:3.8.5-openjdk-17-slim AS builder
 WORKDIR /app
 COPY pom.xml .
